@@ -1,0 +1,78 @@
+openapi: 3.0.3
+info:
+  title: Subscribe and Save
+  version: 0.0.2
+paths:
+  /subscriptions/users/{userId}/products/{asin}:
+    put:
+      description: "This is used to add a subscription to a user-product"
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "28023fjfsl300324"
+        - name: asin
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "UASw344032jl-3840dflksjf"
+        - name: quantity
+          in: query
+          required: true
+          description: "The quantity of delivered product"
+          schema:
+            type: integer
+            maximum: 1000
+            minimum: 1
+            example: 3
+        - name: monthlyFrequency
+          in: query
+          required: true
+          schema:
+            type: integer
+            maximum: 4
+            minimum: 1
+            example: 1
+      responses:
+      "201":
+        description: OK
+        content:
+          application/json:
+            schema:
+            type: object
+            items:
+              $ref: "#/components/schema/Subscription"
+            example: {
+              userId: "283084093"
+              asin: "UAS0001-aaaabbb"
+              quantity: 4,
+              monthlyFrequence: 2,
+              nextShipmentMonth: "March"
+            }
+      "500":
+        description: "Server Error"
+        content:
+          application/json:
+            schema:
+              type: object
+              items:
+                $ref: "#/components/schema/"
+components:
+  schemas:
+    Subscription:
+      type: object
+      properties:
+        userId:
+          type: string
+        asin:
+          type: string
+        quantity:
+          type: integer
+        monthlyFrequence:
+          type: integer
+        nextShipmentMonth:
+          type: string
+  
