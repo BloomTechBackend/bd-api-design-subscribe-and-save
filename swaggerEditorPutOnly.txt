@@ -57,9 +57,19 @@ paths:
         content:
           application/json:
             schema:
-              type: object
+              type: string
               items:
                 $ref: "#/components/schema/"
+              example: "500- your request could not be completed.".
+      "400":
+        description: "User Error"
+        content:
+          application/json:
+            schema:
+              type: object
+              items:
+                $ref: "#/components/schema/Subscription"
+              example: "400- bad input"
 components:
   schemas:
     Subscription:
@@ -75,3 +85,7 @@ components:
           type: integer
         nextShipmentMonth:
           type: string
+<<<<<<< HEAD
+=======
+  
+>>>>>>> a2ed6b20d1ae89cb29156eb3a9ec853459c8ec74
